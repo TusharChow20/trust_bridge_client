@@ -1,13 +1,15 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { Field, FieldDescription, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useForm } from "react-hook-form";
+import { Eye, EyeOff } from "lucide-react";
 
 export default function page() {
   const { register, handleSubmit } = useForm();
   const onSubmit = (data) => console.log(data);
+  const [showPassword, setShowPassword] = useState(false);
   return (
     <div className="max-w-md mx-auto  items-center justify-center mt-30 px-3">
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -22,12 +24,21 @@ export default function page() {
         </Field>
         <Field className={"mt-5"}>
           <FieldLabel htmlFor="input-field-username">Password</FieldLabel>
-          <Input
-            id="input-field-username"
-            type="password"
-            placeholder="Enter your Password"
-            {...register("password")}
-          />
+          <div className="relative flex">
+            <Input
+              id="input-field-username"
+              type={showPassword ? "text" : "password"}
+              placeholder="Enter your Password"
+              {...register("password")}
+            />
+            <button
+              className="absolute right-3 top-1/2 -translate-y-1/2 "
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? <EyeOff></EyeOff> : <Eye></Eye>}
+            </button>
+          </div>
         </Field>
         <Button className={"w-full mt-6"}>Login</Button>
       </form>
