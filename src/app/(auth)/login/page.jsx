@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useForm } from "react-hook-form";
 import { Eye, EyeOff } from "lucide-react";
+import Link from "next/link";
 
 export default function page() {
   const { register, handleSubmit } = useForm();
@@ -42,6 +43,15 @@ export default function page() {
         </Field>
         <Button className={"w-full mt-6"}>Login</Button>
       </form>
+
+      <div className="flex justify-between items-center">
+        <h1>Do not have any Account?</h1>
+        <Link href={"/register"}>
+          <Button className={"bg-transparent text-black text-blue-500"}>
+            Register Now
+          </Button>
+        </Link>
+      </div>
     </div>
   );
 }
