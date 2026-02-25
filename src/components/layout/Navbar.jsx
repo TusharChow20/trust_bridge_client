@@ -8,11 +8,10 @@ import {
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Menu } from "lucide-react";
+import Link from "next/link";
 export default function Navbar() {
   const navLinks = [
     {
@@ -38,9 +37,11 @@ export default function Navbar() {
       </div>
       <div className="hidden md:flex">
         {navLinks.map((link, index) => (
-          <Button key={index} variant="ghost">
-            {link.label}
-          </Button>
+          <Link href={link.href}>
+            <Button key={index} variant="ghost">
+              {link.label}
+            </Button>
+          </Link>
         ))}
       </div>
       <div className="md:hidden">
