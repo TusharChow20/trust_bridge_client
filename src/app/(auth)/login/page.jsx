@@ -45,9 +45,13 @@ export default function page() {
       </form>
 
       <div className="flex justify-between items-center">
-        <h1>Do not have any Account?</h1>
+        <h1 className="text-xs md:text-sm">Do not have any Account?</h1>
         <Link href={"/register"}>
-          <Button className={"bg-transparent text-black text-blue-500"}>
+          <Button
+            className={
+              "bg-transparent text-black text-blue-500 hover:bg-gray-200"
+            }
+          >
             Register Now
           </Button>
         </Link>
