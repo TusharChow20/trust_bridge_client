@@ -7,16 +7,23 @@ import { useForm } from "react-hook-form";
 import { Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
 import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 export default function page() {
+  const router = useRouter();
   const { register, handleSubmit } = useForm();
+  const [error, setError] = useState("");
   const onSubmit = async (data) => {
     const result = await signIn("credentials", {
       email: data.email,
       password: data.password,
       redirect: false,
     });
-    console.log(result);
+    if (result?.error) {
+      setError("Invalid email or password");
+    } else {
+      router.push("/");
+    }
   };
   const [showPassword, setShowPassword] = useState(false);
   return (
@@ -30,6 +37,7 @@ export default function page() {
             placeholder="Enter your Email"
             {...register("email")}
           />
+          {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
         </Field>
         <Field className={"mt-5"}>
           <FieldLabel htmlFor="input-field-username">Password</FieldLabel>
