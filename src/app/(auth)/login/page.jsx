@@ -6,10 +6,18 @@ import { Button } from "@/components/ui/button";
 import { useForm } from "react-hook-form";
 import { Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
+import { signIn } from "next-auth/react";
 
 export default function page() {
   const { register, handleSubmit } = useForm();
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = async (data) => {
+    const result = await signIn("credentials", {
+      email: data.email,
+      password: data.password,
+      redirect: false,
+    });
+    console.log(result);
+  };
   const [showPassword, setShowPassword] = useState(false);
   return (
     <div className="max-w-md mx-auto  items-center justify-center mt-30 px-3">
@@ -18,7 +26,7 @@ export default function page() {
           <FieldLabel htmlFor="input-field-username">Email</FieldLabel>
           <Input
             id="input-field-username"
-            type="text"
+            type="email"
             placeholder="Enter your Email"
             {...register("email")}
           />
@@ -41,7 +49,9 @@ export default function page() {
             </button>
           </div>
         </Field>
-        <Button className={"w-full mt-6"}>Login</Button>
+        <Button type="submit" className={"w-full mt-6"}>
+          Login
+        </Button>
       </form>
 
       <div className="flex justify-between items-center">
