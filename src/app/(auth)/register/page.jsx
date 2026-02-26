@@ -2,6 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { Field, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
+import axiosInstance from "@/lib/axios";
 import { Eye, EyeOff } from "lucide-react";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -14,7 +15,16 @@ export default function Register() {
     watch,
   } = useForm();
   const [showPassword, setShowPassword] = useState(false);
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = async (data) => {
+    console.log(data);
+
+    const response = await axiosInstance.post("/register", {
+      name: data.name,
+      email: data.email,
+      password: data.password,
+    });
+    return response;
+  };
   return (
     <div className="max-w-xl mx-auto mt-30 p-5 border rounded-md">
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -98,7 +108,7 @@ export default function Register() {
           )}
         </Field>
         <Button
-          //   type="submit"
+          type="submit"
           className={"mt-3 w-full bg-green-200 text-black hover:bg-green-400"}
         >
           Submit
