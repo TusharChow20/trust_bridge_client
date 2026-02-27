@@ -38,7 +38,10 @@ export default function Navbar() {
           <Button variant="ghost">All Products</Button>
         </Link>
         {session ? (
-          <Button variant="ghost" onClick={() => signOut()}>
+          <Button
+            variant="ghost"
+            onClick={() => signOut({ callbackUrl: "/login" })}
+          >
             Logout
           </Button>
         ) : (
@@ -65,7 +68,11 @@ export default function Navbar() {
                 <Link href="/products">All Products</Link>
               </DropdownMenuItem>
               {session ? (
-                <DropdownMenuItem onClick={() => signOut()}>
+                <DropdownMenuItem
+                  onClick={async () => {
+                    await signOut({ callbackUrl: "/login" });
+                  }}
+                >
                   Logout
                 </DropdownMenuItem>
               ) : (
