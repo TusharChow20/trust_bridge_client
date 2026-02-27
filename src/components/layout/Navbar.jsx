@@ -38,12 +38,17 @@ export default function Navbar() {
           <Button variant="ghost">All Products</Button>
         </Link>
         {session ? (
-          <Button
-            variant="ghost"
-            onClick={() => signOut({ callbackUrl: "/login" })}
-          >
-            Logout
-          </Button>
+          <>
+            <Link href="/sell-item">
+              <Button variant="ghost">Sell Item</Button>
+            </Link>
+            <Button
+              variant="ghost"
+              onClick={() => signOut({ callbackUrl: "/login" })}
+            >
+              Logout
+            </Button>
+          </>
         ) : (
           <Link href="/login">
             <Button variant="ghost">Login</Button>
