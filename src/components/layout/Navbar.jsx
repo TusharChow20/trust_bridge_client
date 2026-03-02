@@ -31,6 +31,9 @@ export default function Navbar() {
 
       {/* Desktop Menu */}
       <div className="hidden md:flex">
+        <Link href={"/"}>
+          <Button variant="ghost">Home</Button>
+        </Link>
         <Link href="/about">
           <Button variant="ghost">About Us</Button>
         </Link>
@@ -66,6 +69,9 @@ export default function Navbar() {
           </DropdownMenuTrigger>
           <DropdownMenuContent>
             <DropdownMenuGroup>
+              <DropdownMenuItem>
+                <Link href={"/"}>Home</Link>
+              </DropdownMenuItem>
               <DropdownMenuItem>
                 <Link href="/about">About Us</Link>
               </DropdownMenuItem>

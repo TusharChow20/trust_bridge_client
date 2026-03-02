@@ -4,8 +4,11 @@ import { Field, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import axiosInstance from "@/lib/axios";
 import { Eye, EyeOff } from "lucide-react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
 
 export default function Register() {
   const {
@@ -14,16 +17,46 @@ export default function Register() {
     formState: { errors },
     watch,
   } = useForm();
+  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const onSubmit = async (data) => {
-    console.log(data);
+    try {
+      const response = await axiosInstance.post("/register", {
+        name: data.name,
+        email: data.email,
+        password: data.password,
+      });
+      console.log(response);
 
-    const response = await axiosInstance.post("/register", {
-      name: data.name,
-      email: data.email,
-      password: data.password,
-    });
-    return response;
+      if (response.status === 200) {
+        Swal.fire({
+          title: "Success!",
+          text: "Registration successful!",
+          icon: "success",
+        }).then(() => {
+          router.push("/login");
+        });
+      }
+    } catch (error) {
+      if (error.response) {
+        if (error.response.data.message === "User already exists") {
+          Swal.fire({
+            title: "User Already Exists",
+            text: "You already have an account. Please login.",
+            icon: "info",
+            showCancelButton: true,
+            confirmButtonText: "Go to Login",
+            cancelButtonText: "Cancel",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              router.push("/login");
+            }
+          });
+        }
+      } else {
+        alert("Something went wrong");
+      }
+    }
   };
   return (
     <div className="max-w-xl mx-auto mt-30 p-5 border rounded-md">
@@ -114,6 +147,22 @@ export default function Register() {
           Submit
         </Button>
       </form>
+      <div
+        className="flex items-center
+       justify-between
+       "
+      >
+        <h1>Do have an account?</h1>
+        <Link href={"/login"}>
+          <Button
+            className={
+              "bg-transparent text-blue-600 hover:text-black hover:bg-gray-200"
+            }
+          >
+            sign in
+          </Button>
+        </Link>
+      </div>
     </div>
   );
 }
