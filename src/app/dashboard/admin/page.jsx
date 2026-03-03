@@ -11,7 +11,7 @@ export default function AppSidebarAdmin() {
   return (
     <Sidebar>
       <SidebarHeader />
-      <SidebarContent>
+      <SidebarContent className={"p-10"}>
         <SidebarGroup />
         <Button className=" bg-transparent text-black border-1 border-gray-500 hover:bg-gray-400 ">
           <h1>Home</h1>
@@ -21,7 +21,7 @@ export default function AppSidebarAdmin() {
         </Button>
         <SidebarGroup />
       </SidebarContent>
-      <SidebarFooter>
+      <SidebarFooter className={"p-10"}>
         <Button className=" bg-transparent text-black border-1 border-gray-500 hover:bg-gray-400 ">
           Logout
         </Button>
