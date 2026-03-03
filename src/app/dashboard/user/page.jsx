@@ -10,19 +10,22 @@ import {
 export default function AppSidebarUser() {
   return (
     <Sidebar>
-      <SidebarHeader />
-      <SidebarContent>
-        <SidebarGroup />
-        <Button>
-          <h1>Home</h1>
-        </Button>
-        <Button>
-          <h1>ABout us</h1>
-        </Button>
-        <SidebarGroup />
-      </SidebarContent>
-      <SidebarFooter />
-      <h1>Home</h1>
+      <Sidebar>
+        <SidebarHeader />
+        <SidebarContent>
+          <SidebarGroup />
+          <Button>
+            <h1>Home</h1>
+          </Button>
+          <Button>
+            <h1>ABout us</h1>
+          </Button>
+          <SidebarGroup />
+        </SidebarContent>
+        <SidebarFooter>
+          <Button>Logout</Button>
+        </SidebarFooter>
+      </Sidebar>
     </Sidebar>
   );
 }

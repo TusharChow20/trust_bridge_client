@@ -18,7 +18,7 @@ export default function Navbar() {
   const { data: session } = useSession();
 
   return (
-    <div className="mt-5 mx-5 md:mx-1 flex justify-between items-center shadow-md rounded-md px-3">
+    <div className="mt-1 mx-5 md:mx-1 flex justify-between items-center shadow-md rounded-md px-3">
       <div className="w-20 md:w-80">
         <Image
           className="rounded-full"
