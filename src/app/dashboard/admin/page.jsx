@@ -33,6 +33,8 @@ import { usePathname } from "next/navigation";
 import { useSidebar } from "@/components/ui/sidebar";
 import Image from "next/image";
 import logo from "../../../../public/logo.png";
+import { Button } from "@/components/ui/button";
+import { signOut } from "next-auth/react";
 
 const navItems = [
   {
@@ -147,10 +149,10 @@ export default function AppSidebarAdmin() {
           </SidebarMenuItem>
           <SidebarMenuItem>
             <SidebarMenuButton asChild>
-              <Link href="/api/auth/logout">
+              <Button onClick={() => signOut({ callbackUrl: "/login" })}>
                 <LogOut className="w-4 h-4" />
                 <span>Logout</span>
-              </Link>
+              </Button>
             </SidebarMenuButton>
           </SidebarMenuItem>
           <SidebarMenuItem>
