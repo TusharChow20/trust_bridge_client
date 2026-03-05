@@ -25,6 +25,7 @@ import {
 import axiosInstance from "@/lib/axios";
 import React, { useRef, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
+import Swal from "sweetalert2";
 
 const CATEGORIES = [
   "Electronics",
@@ -58,9 +59,19 @@ export default function SellItems() {
     },
   });
 
-  const onSubmit = (data) => {
-    const response = axiosInstance.post("/allProducts", data);
-    console.log(response);
+  const onSubmit = async (data) => {
+    const response = await axiosInstance.post("/allProducts", data);
+    console.log(response.data);
+    if (response.status === 200) {
+      Swal.fire({
+        title: "Added the item for sell",
+        icon: "success",
+        draggable: true,
+      }).then(() => {
+        form.reset();
+        setImagePreview(null);
+      });
+    }
   };
 
   // Handle image file upload later
