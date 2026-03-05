@@ -22,6 +22,7 @@ import {
   InputGroupText,
   InputGroupTextarea,
 } from "@/components/ui/input-group";
+import axiosInstance from "@/lib/axios";
 import React, { useRef, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 
@@ -58,7 +59,8 @@ export default function SellItems() {
   });
 
   const onSubmit = (data) => {
-    console.log("Submitted:", data);
+    const response = axiosInstance.post("/allProducts", data);
+    console.log(response);
   };
 
   // Handle image file upload later
