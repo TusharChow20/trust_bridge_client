@@ -22,7 +22,7 @@ export default function AllProducts() {
   }, []);
 
   return (
-    <div className="max-w-7xl mx-auto px-3">
+    <div className="max-w-7xl mx-auto px-3 mt-5 sm:mt-10">
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {products.map((product) => (
           <Card key={product._id} className="w-full">
@@ -41,7 +41,9 @@ export default function AllProducts() {
 
               <CardTitle>{product.title}</CardTitle>
 
-              <CardDescription>{product.description}</CardDescription>
+              <CardDescription className={"line-clamp-1"}>
+                {product.description}
+              </CardDescription>
             </CardHeader>
             <div className="flex justify-between px-4">
               <h1 className="font-bold text-blue-700">Price</h1>
