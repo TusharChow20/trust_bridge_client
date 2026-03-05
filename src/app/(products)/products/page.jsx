@@ -25,9 +25,14 @@ export default function AllProducts() {
     <div className="max-w-7xl mx-auto px-3">
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {products.map((product) => (
-          <Card key={product._id} className="w-full pt-0">
-            <Image src={product.image} width={400} height={400}></Image>
-
+          <Card key={product._id} className="w-full">
+            <Image
+              src={product.image}
+              width={400}
+              height={300}
+              className="w-full h-48 object-contain"
+              alt={product.title}
+            />
             <CardHeader>
               <CardAction className={"flex flex-col"}>
                 <Badge variant="secondary">{product.category}</Badge>
