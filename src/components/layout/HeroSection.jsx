@@ -7,8 +7,8 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import banner1 from "@/../public/banner1.png";
 import banner2 from "@/../public/banner2.png";
+import banner1 from "@/../public/banner1.png";
 import banner3 from "@/../public/banner3.png";
 import Image from "next/image";
 import Autoplay from "embla-carousel-autoplay";
@@ -56,7 +56,7 @@ export default function HeroSection() {
   const slide = slides[current - 1] || {};
 
   return (
-    <div className="flex flex-col-reverse md:flex-row justify-between items-center mt-10 gap-10">
+    <div className="flex flex-col-reverse md:flex-row justify-between items-center mt-10 gap-10 px-5 md:px-1 overflow-hidden">
       {/* Left Text Area with buttons */}
       <div className="md:w-1/2 px-4 flex flex-col items-center md:items-start gap-5">
         <span className="bg-green-100 text-black font-bold text-sm old px-4 py-1 rounded-full tracking-wide">
@@ -86,15 +86,15 @@ export default function HeroSection() {
       </div>
 
       {/* Right section carousal  */}
-      <div className="flex justify-center md:justify-end">
+      <div className="flex justify-center md:justify-end w-full px-10">
         <Carousel
           plugins={[Autoplay({ delay: 3000 })]}
           opts={{ loop: true }}
-          className="w-[300px]"
+          className="max-w-[500px] "
           setApi={setApi}
         >
           <CarouselContent>
-            <CarouselItem>
+            <CarouselItem className="flex items-center justify-center">
               <div className="relative w-[300px] h-[300px]">
                 <Image
                   src={banner1}
@@ -104,7 +104,8 @@ export default function HeroSection() {
                 />
               </div>
             </CarouselItem>
-            <CarouselItem>
+
+            <CarouselItem className="flex items-center justify-center">
               <div className="relative w-[300px] h-[300px]">
                 <Image
                   src={banner2}
@@ -114,7 +115,8 @@ export default function HeroSection() {
                 />
               </div>
             </CarouselItem>
-            <CarouselItem>
+
+            <CarouselItem className="flex items-center justify-center">
               <div className="relative w-[300px] h-[300px]">
                 <Image
                   src={banner3}
