@@ -23,6 +23,7 @@ import {
   InputGroupTextarea,
 } from "@/components/ui/input-group";
 import axiosInstance from "@/lib/axios";
+import Image from "next/image";
 import React, { useRef, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import Swal from "sweetalert2";
@@ -75,15 +76,26 @@ export default function SellItems() {
   };
 
   // Handle image file upload later
-  const handleImageFile = (file) => {
+  const handleImageFile = async (file) => {
     if (!file || !file.type.startsWith("image/")) return;
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      const dataUrl = e.target.result;
-      setImagePreview(dataUrl);
-      form.setValue("image", dataUrl);
-    };
-    reader.readAsDataURL(file);
+
+    const formData = new FormData();
+    formData.append("image", file);
+
+    try {
+      const res = await axiosInstance.post("/upload", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      const url = res.data.imageUrl;
+
+      setImagePreview(url);
+      form.setValue("image", url);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   // Handle paste (image or URL) current
@@ -382,8 +394,10 @@ export default function SellItems() {
                 >
                   {imagePreview ? (
                     <div className="relative">
-                      <img
+                      <Image
                         src={imagePreview}
+                        width={300}
+                        height={200}
                         alt="Preview"
                         className="max-h-48 mx-auto rounded-md object-contain"
                         onError={() => setImagePreview(null)}
@@ -394,7 +408,7 @@ export default function SellItems() {
                         onClick={(e) => {
                           e.stopPropagation();
                           setImagePreview(null);
-                          form.setValue("image", "");
+                          form.setValue("image", null);
                         }}
                       >
                         ✕
