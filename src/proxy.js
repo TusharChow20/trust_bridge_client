@@ -3,7 +3,12 @@ import { NextResponse } from "next/server";
 
 export default auth((req) => {
   const isLoggedIn = !!req.auth;
-
+  const isLoginPage = req.nextUrl.pathname === "/login";
+  const isRegisterPage = req.nextUrl.pathname === "/register";
+  if (isLoggedIn && (isLoginPage || isRegisterPage)) {
+    const role = req.auth?.user?.role;
+    return NextResponse.redirect(new URL(`/dashboard/${role}`, req.url));
+  }
   const protectedRoutes = ["/sell-item", "/dashboard", "/profile"];
   const isProtectedRoute = protectedRoutes.some((route) =>
     req.nextUrl.pathname.startsWith(route),
@@ -17,5 +22,11 @@ export default auth((req) => {
 });
 
 export const config = {
-  matcher: ["/sell-item", "/dashboard/:path*", "/profile"],
+  matcher: [
+    "/sell-item",
+    "/dashboard/:path*",
+    "/profile",
+    "/login",
+    "/register",
+  ],
 };
