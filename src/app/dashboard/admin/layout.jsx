@@ -1,5 +1,5 @@
+import AppSidebarAdmin from "@/components/layout/AdminAppSideBar";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
-import AppSidebarAdmin from "./page";
 
 export default function Layout({ children }) {
   return (
