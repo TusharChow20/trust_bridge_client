@@ -1,31 +1,10 @@
-import { Button } from "@/components/ui/button";
-import {
-  Sidebar,
-  SidebarContent,
-  SidebarFooter,
-  SidebarGroup,
-  SidebarHeader,
-} from "@/components/ui/sidebar";
-
-export default function AppSidebarUser() {
+export default function UserDashboardPage() {
   return (
-    <Sidebar>
-      <Sidebar>
-        <SidebarHeader />
-        <SidebarContent>
-          <SidebarGroup />
-          <Button>
-            <h1>Home</h1>
-          </Button>
-          <Button>
-            <h1>ABout us</h1>
-          </Button>
-          <SidebarGroup />
-        </SidebarContent>
-        <SidebarFooter>
-          <Button>Logout</Button>
-        </SidebarFooter>
-      </Sidebar>
-    </Sidebar>
+    <div className="flex flex-col gap-4 p-6">
+      <h1 className="text-2xl font-bold">Welcome back 👋</h1>
+      <p className="text-muted-foreground">
+        Your dashboard is under construction. Check back soon!
+      </p>
+    </div>
   );
 }
