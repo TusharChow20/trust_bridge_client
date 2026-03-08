@@ -29,6 +29,7 @@ import {
   ChevronDown,
   User,
   Home,
+  User2Icon,
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -38,6 +39,7 @@ const navItems = [
     label: "Overview",
     items: [
       { title: "Home", icon: Home, href: "/" },
+      { title: "Profile", icon: User2Icon, href: "/dashboard/user/profile" },
       { title: "Dashboard", icon: LayoutDashboard, href: "/dashboard/user" },
       { title: "My Orders", icon: ShoppingBag, href: "/dashboard/user/orders" },
       { title: "Watchlist", icon: Heart, href: "/dashboard/user/watchlist" },
